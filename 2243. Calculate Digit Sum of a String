@@ -1,0 +1,28 @@
+2243. Calculate Digit Sum of a String
+Solution Link: https://leetcode.com/problems/calculate-digit-sum-of-a-string/discuss/2296330/c-easy-explanation-beats-100-0ms-easy-to-understand
+
+
+class Solution {
+public:
+    string digitSum(string s, int k) {
+        while(s.size()>k)  //We will stop as soon as the size of the string s becomes lesser than or equal to k
+        {
+            string temp="";  //To store the new sum as string
+            for(int i=0; i<s.size(); i=i+k)  //To iterate over the string s using indices... i+k because we have to calculate the sum in k groups
+            {
+                int sum=0;
+                for(int j=0; j<k; j++)  //Since i will be iterating as 0,k,2k,3k...... j helps us to reach the indices that are between 0 and k, k and 2k, and so on.
+                {
+                    if(i+j >= s.size())  // At time when the last group will not contain exactly k elements,
+                                          //we might end up adding garbage values to our sum; that is why we have to check if i+j is within the size or not
+                        break;
+                    
+                    sum+= s[i+j]-'0';  //s[i+j]-'0' converts the element at s[i+j] into an integer
+                }
+                temp+= to_string(sum);
+            }
+            s=temp;  //updating s
+        }
+        return s;
+    }
+};
