@@ -1,0 +1,50 @@
+890. Find and Replace Pattern
+Solution Link: https://leetcode.com/problems/find-and-replace-pattern/discuss/2350113/easy-to-understand-c-solution-explained-maps
+
+
+We have to take a map that will map each character of pattern to corresponding character of words[i] and
+another map 'vis' to check whether a particular character of words[i] has been visited or not.
+
+Lets assume a string word from words and the pattern.
+If pattern[i] has not been mapped && word[i] has not been visited, map these elements and check next
+If pattern[i] has not been mapped && word[i] has already been visisted, this means that it has been mapped with some other value. Hence, don't consider this word.
+If pattern[i] has been mapped but it is not mapped to the same word[i] then don't consider this word too.
+
+class Solution {
+public:
+    vector<string> findAndReplacePattern(vector<string>& words, string pattern) {
+        vector<string> ans;
+        for(string it: words)
+        {
+            unordered_map<char, char> mapp;
+            unordered_map<char, int> vis;
+            int flag=1;
+            for(int i=0; i<it.size(); i++)
+            {
+                if(mapp.find(pattern[i]) == mapp.end())
+                {
+                    if(vis[it[i]] == 0)
+                    {
+                        mapp[pattern[i]]=it[i];
+                        vis[it[i]]=1;
+                    }
+                    else
+                    {
+                        flag=0;
+                        break;
+                    }
+                }
+                else if( mapp[pattern[i]] != it[i])
+                {
+                    flag=0;
+                    break;
+                }
+            }
+            if(flag==1)
+                ans.push_back(it);
+        }
+        return ans;
+    }
+};
+
+Please upvote if it helped you :)
