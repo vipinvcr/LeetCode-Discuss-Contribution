@@ -1,0 +1,16 @@
+242. Valid Anagram
+Solution Link: https://leetcode.com/problems/valid-anagram/discuss/2344569/simple-c-3-lines-solution-easy-to-understand
+
+
+We can simply sort both the strings and just compare whether they are equal or not.
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        sort(s.begin(), s.end());
+        sort(t.begin(), t.end());
+        return s==t;
+    }
+};
+
+Please upvote if it helped you :)
