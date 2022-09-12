@@ -1,0 +1,33 @@
+948. Bag of Tokens
+Solution Link: https://leetcode.com/problems/bag-of-tokens/discuss/2567045/O(nlogn)-oror-Two-Pointers-oror-Easy-to-Understand-oror-O(1)-space-oror-C%2B%2B
+
+
+class Solution {
+public:
+    int bagOfTokensScore(vector<int>& tokens, int power) {
+        sort(tokens.begin(), tokens.end());
+        int i=0, j=tokens.size()-1, score=0, maxi=0, k=0;
+        while(i<=j)
+        {
+            if(tokens[i]<=power)
+            {
+                score+=1;
+                power-=tokens[i];
+                i++;
+            }
+            else if(score>=1)
+            {
+                score-=1;
+                power+=tokens[j];
+                j--;
+            }
+            else
+                break;
+            
+            maxi=max(maxi, score);
+        }
+        return maxi;
+    }
+};
+
+Please upvote if it helped you :)
